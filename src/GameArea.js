@@ -11,22 +11,37 @@ class GameArea extends React.Component {
             question: "Question",
             answerList: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
             correct: 0,
-            isWin: false
+            isWin: false,
+            isLoaded: false
         }
         this.getRandomArticles = this.getRandomArticles.bind(this);
         this.winHandler = this.winHandler.bind(this);
     }
 
     componentDidMount(){
-        this.getRandomArticles();
+
+        
+        //this.getRandomArticles();
     }
     winHandler(){
-        this.getRandomArticles();
-        this.setState({
-            question: "Brawo! LECIMY DALEJ"
-        })
+        //this.getRandomArticles();
+        // this.setState({
+        //     question: "Brawo! LECIMY DALEJ"
+        // })
+        
     }
     getRandomArticles = async () => {
+
+        /*
+           Wikijs calls Wikipedia API over HTTP for some reason, 
+           this results in 
+           "Blocked loading mixed active content 
+           "http://en.wikipedia.org/w/api.php?format=json&action=query&redirects=&list=random&rnnamespace=0&rnlimit=4&origin=*""
+           
+           Rewrite the code and call API directly, compose API calls using Fetch(), XHR or different library.
+           I need two types of calls, the first is above "wiki().random", the second is "wiki().page"  
+         */
+
         var correct = Math.floor(Math.random() * Math.floor(4));
         const randomPages = await wiki({
             origin: '*'

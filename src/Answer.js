@@ -12,8 +12,21 @@ class Answer extends React.Component {
     checkWin(){
         if(this.props.answerId == this.props.correct){
             this.props.handler();
-            console.log("You won");
+            console.log("You woddn");
         }
+        fetch("https://en.wikipedia.org/w/api.php?format=json&action=query&redirects=&list=random&rnnamespace=0&rnlimit=4&origin=*")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                console.log(result.query.random);
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    console.log(error);
+                }
+            )
     }
     render(){
         return (
