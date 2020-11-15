@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const favicon = require('express-favicon');
 const path = require('path');
 const port = process.env.PORT || 8080;
@@ -7,6 +8,13 @@ app.use(favicon(__dirname + '/build/favicon.ico'));
 // the __dirname is the current directory from where the script is running
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(
+  cors({
+    origin: "https://wiki-react.herokuapp.com",
+    optionsSuccessStatus: 200,
+    credentials: true,
+  })
+);
 app.get('/ping', function (req, res) {
  return res.send('pong');
 });
