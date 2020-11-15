@@ -28,19 +28,11 @@ class GameArea extends React.Component {
     }
     getRandomArticles = async () => {
         var correct = Math.floor(Math.random() * Math.floor(4));
-        const randomPages = await wiki({
-            headers: {
-                'Strict-Transport-Security': 'max-age=63072000'
-            }
-        }).random(4);
+        const randomPages = await wiki().random(4);
         console.log("Random Pages: " + randomPages);
         const wikiPage = [];
         for (let i=0; i<4; i++){
-            wikiPage.push(await wiki({
-                headers: {
-                    'Strict-Transport-Security': 'max-age=63072000'
-                }
-            }).page(randomPages[i]));   
+            wikiPage.push(await wiki().page(randomPages[i]));   
         }
         wikiPage[correct].summary().then(r => {
     
