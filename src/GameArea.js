@@ -1,5 +1,4 @@
 import React from 'react';
-import wiki from 'wikijs';
 import Question from './Question';
 import AnswerArea from './AnswerArea';
 import './GameArea.css';
@@ -15,7 +14,6 @@ class GameArea extends React.Component {
             isLoaded: false,
             randomTitles: []
         }
-        this.getRandomArticles = this.getRandomArticles.bind(this);
         this.getRandomTitles = this.getRandomTitles.bind(this);
         this.getArticles = this.getArticles.bind(this);
         this.winHandler = this.winHandler.bind(this);
