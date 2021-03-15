@@ -83,58 +83,6 @@ class GameArea extends React.Component {
             });
     }
 
-    getRandomArticles = async () => {
-
-        /*
-           Wikijs calls Wikipedia API over HTTP for some reason, 
-           this results in 
-           "Blocked loading mixed active content 
-           "http://en.wikipedia.org/w/api.php?format=json&action=query&redirects=&list=random&rnnamespace=0&rnlimit=4&origin=*""
-           
-           Rewrite the code and call API directly, compose API calls using Fetch(), XHR or different library.
-           I need two types of calls, the first is above "wiki().random", the second is "wiki().page"  
-         */
-
-        var correct = Math.floor(Math.random() * Math.floor(4));
-
-        const randomPages = await wiki({
-            origin: '*'
-        }).random(4);
-
-        console.log("Random Pages: " + randomPages);
-        
-        const wikiPage = [];
-        
-        for (let i=0; i<4; i++){
-            wikiPage.push(await wiki({
-                origin: '*'
-            }).page("Jack"));
-        }
-        
-        wikiPage[correct].summary().then(r => {
-    
-            //Redact title from summary and keep it 4 sentences max.
-            let arr = wikiPage[correct].raw.title.split(" ");
-            arr.forEach(e => {
-                let reg = new RegExp(e, "g");
-                r=r.replace(reg, " --- ");
-            });
-    
-            this.setState({
-                question: r,
-                answerList: randomPages,
-                correct: correct
-            })
-            console.log(r);
-            //Check how many sentences from summary, if more then 4, then cut the rest off
-            r = r.split(".");
-            if(r.length > 4) {
-                r.splice(4);
-            }
-            
-        });
-    }
-
     render(){
         return (
             <div className="GameArea">
