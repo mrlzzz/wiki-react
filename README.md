@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# WikiGuessr
 
 "Who Wants To Be A Millionaire" like game, where player is prompted with summaries of random wikipedia pages. 
 
